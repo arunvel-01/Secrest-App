@@ -1,7 +1,9 @@
+require("dotenv").config(); 
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const encrypt = require("mongoose-encryption");
 
 const app = express();
 
@@ -14,12 +16,19 @@ app.use(
   })
 );
 
-mongoose.connect("mongodb+srv://Arunvel:arunvel@cluster0.0s6pycf.mongodb.net/userDB", {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-const userSchema = {
+const userSchema = new mongoose.Schema ({
   email: String,
   password: String
-};
+});
+
+const SECRET = process.env.SECRET;
+
+userSchema.plugin(encrypt, { secret: SECRET, encryptedFields: ["password"]});
 
 const user = new mongoose.model("User", userSchema)
 
@@ -60,6 +69,8 @@ app.post("/login", async function(req, res){
     const foundUser = await user.findOne({ email: username }).exec();
     if (foundUser && foundUser.password === password) {
       res.render("secrets");
+    } else {
+      res.render("login", { error: "Invalid username or password" });
     }
   } catch (error) {
     console.error(error);
