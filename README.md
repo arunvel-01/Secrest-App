@@ -1,54 +1,58 @@
-## Secrets Web App
+# Secrets Web App
 
-**Description:** This is a web application for sharing secrets anonymously.
+This is a web application for sharing secrets anonymously.
 
-**Table of Contents:**
+## Table of Contents
 
-* [Getting Started](#getting-started)
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Contributing](#contributing)
-* [License](#license)
+- [Live Website](#live-website)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Endpoints](#endpoints)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
 
-**Getting Started**
+## Live Website
 
-This section will guide you on how to set up and run the project on your local machine.
+You can access the live website [here](https://secrets-web-app-evob.onrender.com/).
 
-**Prerequisites:**
+## Installation
 
-* Node.js and npm (Node Package Manager)
-* MongoDB
+1. Clone the repository:
+   git clone https://github.com/yourusername/secrets-web-app.git
+   cd secrets-web-app
 
-**Installation:**
-
-1. Clone the repository.
-
-```bash
-git clone https://github.com/yourusername/secrets-web-app.git
-cd secrets-web-app
-
-Install dependencies.
+## Install dependencies:
 npm install
 
-Set up environment variables.
+## Set up environment variables:
+
 Create a .env file in the root of your project and add the following:
+
 SECRET=your_session_secret
 MONGODB_URI=your_mongodb_connection_string
 CLIENT_ID=your_google_oauth_client_id
 CLIENT_SECRET=your_google_oauth_client_secret
 
-Start the server.
+## Start the server:
 node app.js
 
-Usage
+## Endpoints:
 
-The live application is accessible at https://secrets-web-app-evob.onrender.com/.
+GET /secrets: Get all secrets.
+POST /secrets: Create a new secret.
+DELETE /secrets: Delete all secrets.
+Specific Secret
+GET /secrets/:secretID: Get a specific secret.
+PUT /secrets/:secretID: Update a specific secret.
+PATCH /secrets/:secretID: Partially update a specific secret.
+DELETE /secrets/:secretID: Delete a specific secret.
 
-Contributing
+## Technologies Used
+Node.js
+Express.js
+MongoDB
+EJS
 
-If you'd like to contribute to the project, please fork the repository and create a pull request.
+## Contributing
+Contributions are welcome! Please fork the repository and submit a pull request.
 
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
