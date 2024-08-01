@@ -9,6 +9,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
+const { job } = require('./cron');
 
 // Create an instance of the Express app
 const app = express();  
@@ -195,6 +196,8 @@ app.post("/login", async function(req, res){
     }
   });
 });
+
+job.start();
 
 // Start the server
 const port = process.env.PORT || 3000;
